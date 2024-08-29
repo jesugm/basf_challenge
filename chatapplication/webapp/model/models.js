@@ -13,6 +13,13 @@ function (JSONModel, Device) {
             var oModel = new JSONModel(Device);
             oModel.setDefaultBindingMode("OneWay");
             return oModel;
+        },
+
+        
+        createChatModel: function () {
+            var oChatModel = new JSONModel();
+            oChatModel.loadData("model/chatSet.json"); // Load the JSON file
+            return oChatModel;
         }
     };
 

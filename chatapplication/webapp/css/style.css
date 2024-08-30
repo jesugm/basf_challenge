@@ -1,1 +1,29 @@
-/* Enter your custom styles here */
+
+.sapMCLI[data-flag="S"] {
+    display: flex;
+    align-self: flex-end;
+    background-color: #dcf8c6; /* Green background for sent messages */
+    padding: 8px;
+    border-radius: 10px;
+    max-width: 60%;
+    margin-left: 40%;
+    text-align: left;
+}
+
+/* Styling for received messages */
+.sapMCLI[data-flag="R"] {
+    display: flex;
+    align-self: flex-start;
+    background-color: #ffffff; /* White background for received messages */
+    padding: 8px;
+    border-radius: 10px;
+    max-width: 60%;
+    margin: 5px 0;
+    text-align: left;
+}
+
+.sapMText.sapUiSelectable.sapMTextBreakWord.sapMTextMaxWidth.dateText {
+    font-size: 0.75rem;
+    color: #999;
+    margin-top: 4px;
+}

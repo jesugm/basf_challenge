@@ -83,6 +83,11 @@
           "target": [
             "TargetMain"
           ]
+        },
+        {
+          "pattern": "chat/{phone}",
+          "name": "Chat",
+          "target": "chatDetail"
         }
       ],
       "targets": {
@@ -92,6 +97,12 @@
           "clearControlAggregation": false,
           "viewId": "Main",
           "viewName": "Main"
+        },
+        "chatDetail": {
+            "viewName": "Chat",
+            "viewLevel": 2,
+            "viewId": "Chat",
+            "viewPath": "com.basf.yardmanagement.chatapp.chatapplication.view"
         }
       }
     },

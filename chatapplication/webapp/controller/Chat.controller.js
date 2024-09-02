@@ -2,15 +2,21 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
+    "sap/ui/model/FilterOperator",
+    "../model/formatter"
 ],
-    function (Controller, JSONModel, Filter, FilterOperator) {
+    function (Controller, JSONModel, Filter, FilterOperator, formatter) {
         "use strict";
 
         return Controller.extend("com.basf.yardmanagement.chatapp.chatapplication.controller.Chat", {
+            
+            formatter: formatter,
+
             onInit: function () {
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.getRoute("Chat").attachPatternMatched(this._onObjectMatched, this);
+
+                this._scrollToLastItem();
             },
 
             // Sample JSON data for received messages
@@ -94,12 +100,55 @@ sap.ui.define([
                 // Create a JSON model with the combined messages
                 var oChatModel = new JSONModel(aAllMessages);
                 this.getView().setModel(oChatModel, "chat");
+                
+            },
 
-                // Scroll to the bottom of the list when loading
-                setTimeout(function () {
-                    var oList = this.getView().byId("chatList");
-                    oList.scrollTo(0, aAllMessages.length - 1);
-                }.bind(this), 0);
+            onSendPress: function () {
+                // Retrieve input value
+                var oInput = this.byId("messageInput");
+                var sMessage = oInput.getValue().trim();
+                
+                // Basic validation
+                if (!sMessage) {
+                    sap.m.MessageToast.show("Please enter a message.");
+                    return;
+                }
+                
+                // Retrieve chat model
+                var oModel = this.getView().getModel("chat");
+                var aMessages = oModel.getProperty("/");
+
+                var sPhone = aMessages[0] ? aMessages[0].phone : "";
+    
+                // Create a new message object
+                var oNewMessage = {
+                    text: sMessage,
+                    date: new Date().toLocaleString(),  // Example date format
+                    flag: "S",  // Assuming "S" for sent messages
+                    phone: sPhone,
+                    sent: true,
+                    delivered: true,
+                    read: false
+                };
+    
+                // Add the new message to the model
+                aMessages.push(oNewMessage);
+                oModel.setProperty("/", aMessages);
+    
+                // Clear the input field
+                oInput.setValue("");
+
+                this._scrollToLastItem();
+            },
+
+            _scrollToLastItem: async function () {
+                var oList = this.byId("chatList");  // Get the list control
+                var iLastItemIndex = oList.getItems().length - 1;  // Get the index of the last item
+    
+                // Scroll to the last item using scrollToIndex method
+                if (iLastItemIndex >= 0) {
+                    await oList.scrollToIndex(iLastItemIndex);
+                }
             }
         });
     });

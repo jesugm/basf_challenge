@@ -8,17 +8,32 @@
         <content>
             <List id="chatList" items="{chat>/}" growing="true" growingScrollToLoad="true">
                 <items>
-                    <CustomListItem>
-                       <VBox>
-                            <Text text="{chat>text}" wrapping="true" />
-                            <Text text="{chat>date}" class="dateText" />
-                        </VBox>          
-                        <customData>
+                    <CustomListItem>                       
+                            <VBox>
+                                <Text text="{chat>text}" wrapping="true" />
+                            <Text text=" { path: 'chat>date' , formatter: '.formatter.formatDate'}" class="dateText" />
+                            </VBox>          
+                            <customData>
                                 <core:CustomData key="flag" value="{chat>flag}" writeToDom="true" />
-                        </customData>
+                            </customData>                                
                     </CustomListItem>
                 </items>
             </List>
         </content>
+
+        <footer>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Input 
+                    id="messageInput" 
+                    placeholder="Type your message..." 
+                    width="100%" 
+                    submit="onSendPress" /> 
+                <Button 
+                    text="Send" 
+                    icon="sap-icon://paper-plane" 
+                    press="onSendPress" /> 
+            </Toolbar>
+        </footer>
     </Page>
 </mvc:View>

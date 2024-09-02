@@ -19,7 +19,7 @@
   "sap.ui": {
     "technology": "UI5",
     "icons": {
-      "icon": "",
+      "icon": "images/basficon.png",
       "favIcon": "",
       "phone": "",
       "phone@2": "",
@@ -30,7 +30,8 @@
       "desktop": true,
       "tablet": true,
       "phone": true
-    }
+    },
+    "fullWidth": true
   },
   "sap.ui5": {
     "flexEnabled": false,

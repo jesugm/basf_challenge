@@ -2,16 +2,15 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
-    controllerName="com.basf.yardmanagement.chatapp.chatapplication.controller.Chat">
-    
+    controllerName="com.basf.yardmanagement.chatapp.chatapplication.controller.Chat">    
     <Page title="{i18n>chatTitle}">
         <content>
             <List id="chatList" items="{chat>/}" growing="true" growingScrollToLoad="true">
                 <items>
                     <CustomListItem>                       
                             <VBox>
-                                <Text text="{chat>text}" wrapping="true" />
-                            <Text text=" { path: 'chat>date' , formatter: '.formatter.formatDate'}" class="dateText" />
+                                <Text text="{chat>text}" class="messageText" wrapping="true" />
+                                <Text text=" { path: 'chat>date' , formatter: '.formatter.formatDate'}" class="dateText" />
                             </VBox>          
                             <customData>
                                 <core:CustomData key="flag" value="{chat>flag}" writeToDom="true" />

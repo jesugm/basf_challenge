@@ -2,25 +2,25 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     controllerName="com.basf.yardmanagement.chatapp.chatapplication.controller.Main">
-    <Page title="Team chats">
-        <SearchField
-            placeholder="Search contacts"
-            liveChange="onSearch"/>
-        <List
-            id="chatsList"
-            items="{
-                path: 'chats>/',
-                sorter: {path: 'lastMessage/date',
-                        descending: true}
-            }">
-            <items>
-                <StandardListItem
-                    title="{chats>contactName}"
-                    description="{chats>lastMessage/text}"
-                    icon="{chats>photo}"
-                    type="Navigation"
-                    press="onChatPress"/>
-            </items>
-        </List>
-    </Page>
+    
+    <SearchField
+        placeholder="Search contacts"
+        liveChange="onSearch"/>
+    <List
+        id="chatsList"
+        items="{
+            path: 'chats>/',
+            sorter: {path: 'lastMessage/date',
+                    descending: true}
+        }">
+        <items>
+            <StandardListItem
+                title="{chats>contactName}"
+                description="{chats>lastMessage/text}"
+                icon="{chats>photo}"
+                type="Navigation"
+                press="onChatPress"/>
+        </items>
+    </List>
+    
 </mvc:View>

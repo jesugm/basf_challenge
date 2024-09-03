@@ -2,25 +2,30 @@
 .sapMCLI[data-flag="S"] {
     display: flex;
     align-self: flex-end;
-    background-color: #004A96; /* Green background for sent messages */
-    color: #ffff;
+    background-color: #004A96; /* Green background for sent messages */color: white;
     padding: 8px;
     border-radius: 10px;
     max-width: 60%;
-    margin-left: 40%;
+    margin-left: 70%;
+    margin-right: 2%;
     text-align: left;
+}
+
+.sapMCLI[data-flag="S"] .messageText{
+    color: white;    
 }
 
 /* Styling for received messages */
 .sapMCLI[data-flag="R"] {
     display: flex;
     align-self: flex-start;
-    background-color: #e4e4e4; /* White background for received messages */
-    color: #ffff;
+    background-color: #ececec; /* White background for received messages */
     padding: 8px;
     border-radius: 10px;
     max-width: 60%;
     margin: 5px 0;
+    margin-right: 70%;
+    margin-left: 2%;
     text-align: left;
 }
 

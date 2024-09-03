@@ -1,31 +1,31 @@
-
-.sapMCLI[data-flag="S"] {
+.sapMPageEnableScrolling.sapUiScrollDelegate{
+    background-color: white;
+}
+.sapMFlexBoxWrapNoWrap.sapMFlexBoxAlignContentStretch.sapMFlexBoxBGTransparent[data-flag="S"] {
     display: flex;
     align-self: flex-end;
     background-color: #004A96; /* Green background for sent messages */color: white;
-    padding: 8px;
+    padding: 12px;
     border-radius: 10px;
-    max-width: 60%;
-    margin-left: 70%;
-    margin-right: 2%;
+    max-width: 50%;
+    width: auto;
     text-align: left;
 }
 
-.sapMCLI[data-flag="S"] .messageText{
+.sapMFlexBoxBGTransparent[data-flag="S"] .messageText{
     color: white;    
 }
 
 /* Styling for received messages */
-.sapMCLI[data-flag="R"] {
+.sapMFlexBoxWrapNoWrap.sapMFlexBoxAlignContentStretch.sapMFlexBoxBGTransparent[data-flag="R"] {
     display: flex;
     align-self: flex-start;
     background-color: #ececec; /* White background for received messages */
-    padding: 8px;
+    padding: 12px;
     border-radius: 10px;
-    max-width: 60%;
+    max-width: 50%;
+    width: auto;
     margin: 5px 0;
-    margin-right: 70%;
-    margin-left: 2%;
     text-align: left;
 }
 
@@ -34,3 +34,52 @@
     color: #999;
     margin-top: 4px;
 }
+
+.listItem{
+    border-color: transparent;
+}
+
+.listItem:focus{    
+    outline: transparent;
+}
+
+.profilePic{
+    width: 60%;
+    margin: 5%;
+    margin-left: 10%;
+    margin-top: 5px;
+    border-radius: 50%; /* Makes the image round */
+    overflow: hidden; /* Ensures that the image remains round even if resized */
+}
+
+.horizontalBox div:has(img.profilePic){
+    width: 10%;
+    height: 4%;
+    margin-left: 10px;
+}
+
+@media (min-width: 600px) {
+    .horizontalBox div:has(img.profilePic) {
+        width: 6%; 
+    }
+}
+
+@media (min-width: 1200px) {
+    .horizontalBox div:has(img.profilePic) {
+        width: 4%; 
+    }
+}
+
+.horizontalBox[data-horizontalflag='S']{
+    justify-content: end;
+}
+
+.statusIcon{
+    width: 12px;
+    margin-left: 50px;
+    margin-top: 15px;
+    margin-right: 5px;
+}
+
+
+

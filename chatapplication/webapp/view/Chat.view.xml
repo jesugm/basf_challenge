@@ -5,16 +5,33 @@
     controllerName="com.basf.yardmanagement.chatapp.chatapplication.controller.Chat">    
     <Page title="{i18n>chatTitle}">
         <content>
-            <List id="chatList" items="{chat>/}" growing="true" growingScrollToLoad="true">
+            <List id="chatList" items="{chat>/}" growing="true" growingScrollToLoad="true" >
                 <items>
-                    <CustomListItem>                       
-                            <VBox>
-                                <Text text="{chat>text}" class="messageText" wrapping="true" />
-                                <Text text=" { path: 'chat>date' , formatter: '.formatter.formatDate'}" class="dateText" />
-                            </VBox>          
-                            <customData>
-                                <core:CustomData key="flag" value="{chat>flag}" writeToDom="true" />
-                            </customData>                                
+                    <CustomListItem class="listItem" >
+                                <HBox class="horizontalBox">
+                                    <Image class="profilePic" src="images/miguel.jpg" visible="{= ${chat>flag} === 'R' }"></Image>
+                                    <Image 
+                                        src="images/grey-check.png" 
+                                        class="statusIcon" 
+                                        visible="{= ${chat>flag} === 'S' }"
+                                        />
+                                    <Image 
+                                        src="images/blue-check.png" 
+                                        class="statusIcon" 
+                                        visible="false" />
+                                    <VBox>
+                                        <Text text="{chat>text}" class="messageText" wrapping="true" />
+                                        <!-- <Text text=" { path: 'chat>date' , formatter: '.formatter.formatDate'}" class="dateText" /> -->
+                                        
+                                        <customData>
+                                            <core:CustomData key="flag" value="{chat>flag}" writeToDom="true" />
+                                        </customData> 
+                                    </VBox>
+                                    <Image class="profilePic" src="images/yalan.jpg" visible="{= ${chat>flag} === 'S' }"></Image>
+                                    <customData>
+                                        <core:CustomData key="horizontalFlag" value="{chat>flag}" writeToDom="true"/>
+                                    </customData>
+                                </HBox>                                              
                     </CustomListItem>
                 </items>
             </List>

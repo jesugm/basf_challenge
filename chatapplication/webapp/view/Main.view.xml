@@ -8,6 +8,7 @@
         liveChange="onSearch"/>
     <List
         id="chatsList"
+        class="chatsList"
         items="{
             path: 'chats>/',
             sorter: {path: 'lastMessage/date',

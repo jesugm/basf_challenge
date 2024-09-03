@@ -81,5 +81,10 @@
     margin-right: 5px;
 }
 
+.chatsList img{    
+    border-radius: 50%; /* Makes the image round */
+    overflow: hidden; /* Ensures that the image remains round even if resized */
+}
+
 
 

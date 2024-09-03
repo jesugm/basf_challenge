@@ -2,21 +2,27 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
+    "sap/ui/model/FilterOperator",
+    "../model/models"
 ],
-    function (Controller, JSONModel, Filter, FilterOperator) {
+    function (Controller, JSONModel, Filter, FilterOperator, models) {
         "use strict";
 
         return Controller.extend("com.basf.yardmanagement.chatapp.chatapplication.controller.Main", {
-            onInit: function () {
+
+            models: models,
+
+            onInit:async function () {
 
                 // Set up the chat model
                 var oChatModel = this.createChatModel();
                 this.getView().setModel(oChatModel, "chats");
+                var aChats = await this.models.getChats();
 
                 this._loadAndProcessData();
 
             },
+
 
             // Sample JSON data for received messages
             _receivedMessages: [

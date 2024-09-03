@@ -16,11 +16,12 @@ function (JSONModel, Device) {
         },
 
         
-        createChatModel: function () {
-            var oChatModel = new JSONModel();
-            oChatModel.loadData("model/chatSet.json"); // Load the JSON file
-            return oChatModel;
-        }
+        
+        getChats: async function(){
+            var oMydata = new sap.ui.model.json.JSONModel(); 
+            await oMydata.loadData("chatsSet.json"); 
+            return oMydata.getData();
+        },
     };
 
 });

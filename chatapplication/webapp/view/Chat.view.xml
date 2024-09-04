@@ -29,7 +29,7 @@
                                             <core:CustomData key="flag" value="{chat>flag}" writeToDom="true" />
                                         </customData> 
                                     </VBox>
-                                    <Image class="profilePic" src="images/yalan.jpg" visible="{= ${chat>flag} === 'S' }"></Image>
+                                    <Image class="profilePic" src="images/default-user.jpg" visible="{= ${chat>flag} === 'S' }"></Image>
                                     <customData>
                                         <core:CustomData key="horizontalFlag" value="{chat>flag}" writeToDom="true"/>
                                     </customData>

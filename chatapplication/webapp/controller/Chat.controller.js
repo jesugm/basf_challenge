@@ -97,6 +97,17 @@ sap.ui.define([
                     return parseDate(a.date) - parseDate(b.date);
                 });
 
+                 // Add a flag to control the visibility of the date
+                aAllMessages.forEach((message, index) => {
+                    if (index === 0) {
+                        message.showDate = true; // Show the date for the first message
+                    } else {
+                        var previousMessage = aAllMessages[index - 1];
+                        // Compare dates; show the date if different from the previous message
+                        message.showDate = message.date !== previousMessage.date;
+                    }
+                });
+
                 // Create a JSON model with the combined messages
                 var oChatModel = new JSONModel(aAllMessages);
                 this.getView().setModel(oChatModel, "chat");

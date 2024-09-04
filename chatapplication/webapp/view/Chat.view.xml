@@ -9,7 +9,7 @@
                 <items>
                     <CustomListItem class="listItem" >
                                 <HBox justifyContent="Center" alignItems="Center" class="dateBox">
-                                    <Text text=" { path: 'chat>date' , formatter: '.formatter.formatDate'}" class="dateText" />
+                                    <Text text=" { path: 'chat>date' , formatter: '.formatter.formatDate'}" class="dateText" visible="{chat>showDate}"/>
                                 </HBox>                                
                                 <HBox class="horizontalBox">
                                     <Image class="profilePic" src="images/miguel.jpg" visible="{= ${chat>flag} === 'R' }"></Image>

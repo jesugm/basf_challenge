@@ -101,5 +101,10 @@
     overflow: hidden; /* Ensures that the image remains round even if resized */
 }
 
+.sapMPageEnableScrolling.sapUiScrollDelegate{
+    padding-bottom: 2rem;
+    padding-top: 1rem;
+}
+
 
 

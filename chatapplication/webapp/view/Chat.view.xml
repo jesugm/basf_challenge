@@ -16,12 +16,12 @@
                                     <Image 
                                         src="images/grey-check.png" 
                                         class="statusIcon" 
-                                        visible="{= ${chat>flag} === 'S' }"
+                                        visible="{= ${chat>check} === 'G' }"
                                         />
                                     <Image 
                                         src="images/blue-check.png" 
                                         class="statusIcon" 
-                                        visible="false" />
+                                        visible="{= ${chat>check} === 'R' }"/>
                                     <VBox>
                                         <Text text="{chat>text}" class="messageText" wrapping="true" />
                                         

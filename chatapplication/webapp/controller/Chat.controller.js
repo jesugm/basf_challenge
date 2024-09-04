@@ -106,6 +106,17 @@ sap.ui.define([
                         // Compare dates; show the date if different from the previous message
                         message.showDate = message.date !== previousMessage.date;
                     }
+
+                    // Add 'check' property based on sent and read properties
+                    if (message.sent) {
+                        if (message.read) {
+                            message.check = 'R'; // Sent and read
+                        } else {
+                            message.check = 'G'; // Sent but not read
+                        }
+                    }else{
+                        message.check = '';
+                    }
                 });
 
                 // Create a JSON model with the combined messages

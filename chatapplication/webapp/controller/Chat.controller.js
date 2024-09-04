@@ -33,7 +33,7 @@ sap.ui.define([
                 oModel.setProperty("/image", "images/" + sImage);
 
                 var oReceivedMessages = await this.models.getReceivedMessages(); // Mock function
-                var oSentMessages = await this.models.getSentMessages(); // Mock function
+                var oSentMessages = this.getOwnerComponent().getModel("sentMessages"); // Mock function
 
                 // Filter the received messages by phone number
                 var aFilteredReceivedMessages = oReceivedMessages.getData().map(message => ({ ...message, flag: 'R' })).filter(function (message) {
@@ -125,9 +125,17 @@ sap.ui.define([
                 // Add the new message to the model
                 aMessages.push(oNewMessage);
                 oModel.setProperty("/", aMessages);
+                var aGlobalSentMessages = this.getOwnerComponent().getModel("sentMessages").getData();
+                oNewMessage.date = oNewMessage.date.replace(", ", "T");
+                aGlobalSentMessages.push(oNewMessage);
+                this.getOwnerComponent().getModel("sentMessages").setData(aGlobalSentMessages);
     
                 // Clear the input field
                 oInput.setValue("");
+
+                //This code, in a real application would be used to send the message to the backend
+                //so it persists, making possible  
+                //this.models.sendMessage(oNewMessage)
 
                 this._scrollToLastItem();
             },

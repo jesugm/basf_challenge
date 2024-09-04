@@ -21,18 +21,21 @@ sap.ui.define([
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.getRoute("RouteMain").attachPatternMatched(this._onObjectMatched, this);
 
+                var oSentMessagesModel = await this.models.getSentMessages();
+                this.getOwnerComponent().setModel(oSentMessagesModel, "sentMessages");
+
                 this._loadAndProcessData();
 
             },
 
-            // _onObjectMatched: async function(){
-            //     await this._loadAndProcessData();
-            // },
+            _onObjectMatched: async function(){
+                await this._loadAndProcessData();
+            },
 
             _loadAndProcessData: async function () {
                 // Example data loading - replace with actual data fetch if needed
                 var oReceivedMessagesModel = await this.models.getReceivedMessages(); // Mock function
-                var oSentMessagesModel = await this.models.getSentMessages(); // Mock function
+                var oSentMessagesModel = this.getOwnerComponent().getModel("sentMessages"); // Mock function
 
                 // Combine and find the latest message per contact
                 this._getLatestMessages(oReceivedMessagesModel.getData(), oSentMessagesModel.getData());
@@ -113,11 +116,7 @@ sap.ui.define([
                     return message.phone === sPhone;
                 });
 
-                // Define the data to pass to the next view
-                var oData = {
-                    receivedMessages: aFilteredReceivedMessages,
-                    sentMessages: aFilteredSentMessages
-                };
+                
 
                 // Perform navigation to the chat detail view, passing the filtered messages as parameters
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);

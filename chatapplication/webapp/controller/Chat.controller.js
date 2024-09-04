@@ -24,11 +24,13 @@ sap.ui.define([
             _onObjectMatched: async function (oEvent) {
                 var sPhone = oEvent.getParameter("arguments").phone;
                 var sName = oEvent.getParameter("arguments").name;
+                var sImage = oEvent.getParameter("arguments").image;
 
                 var oView = this.getView();
                 var oModel = oView.getModel("viewModel");
 
                 oModel.setProperty("/currentName", sName);
+                oModel.setProperty("/image", "images/" + sImage);
 
                 var oReceivedMessages = await this.models.getReceivedMessages(); // Mock function
                 var oSentMessages = await this.models.getSentMessages(); // Mock function

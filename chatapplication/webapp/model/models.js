@@ -18,20 +18,26 @@ function (JSONModel, Device) {
         
         
         getChats: async function(){
+            sap.ui.core.BusyIndicator.show();
             var oMydata = new sap.ui.model.json.JSONModel(); 
             await oMydata.loadData("chatsSet.json"); 
+            sap.ui.core.BusyIndicator.hide();
             return oMydata;
         },
 
         getReceivedMessages: async function(){
+            sap.ui.core.BusyIndicator.show();
             var oMydata = new sap.ui.model.json.JSONModel(); 
             await oMydata.loadData("ReceivedMessagesSet.json"); 
+            sap.ui.core.BusyIndicator.hide();
             return oMydata;
         },
 
         getSentMessages: async function(){
+            sap.ui.core.BusyIndicator.show();
             var oMydata = new sap.ui.model.json.JSONModel(); 
-            await oMydata.loadData("SentMessagesSet.json"); 
+            await oMydata.loadData("SentMessagesSet.json");             
+            sap.ui.core.BusyIndicator.hide();
             return oMydata;
         },
     };

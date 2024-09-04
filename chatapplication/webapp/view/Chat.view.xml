@@ -12,7 +12,7 @@
                                     <Text text=" { path: 'chat>date' , formatter: '.formatter.formatDate'}" class="dateText" visible="{chat>showDate}"/>
                                 </HBox>                                
                                 <HBox class="horizontalBox">
-                                    <Image class="profilePic" src="images/miguel.jpg" visible="{= ${chat>flag} === 'R' }"></Image>
+                                    <Image class="profilePic" src="{viewModel>/image}" visible="{= ${chat>flag} === 'R' }"></Image>
                                     <Image 
                                         src="images/grey-check.png" 
                                         class="statusIcon" 

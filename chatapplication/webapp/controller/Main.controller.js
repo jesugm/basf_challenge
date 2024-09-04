@@ -1,11 +1,10 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "../model/models"
 ],
-    function (Controller, JSONModel, Filter, FilterOperator, models) {
+    function (Controller, Filter, FilterOperator, models) {
         "use strict";
 
         return Controller.extend("com.basf.yardmanagement.chatapp.chatapplication.controller.Main", {
@@ -92,9 +91,6 @@ sap.ui.define([
 
             onChatPress: async function (oEvent) {
 
-                var oReceivedMessages = await this.models.getReceivedMessages(); // Mock function
-                var oSentMessages = await this.models.getSentMessages(); // Mock function
-
                 // Get the selected item from the event
                 var oItem = oEvent.getSource();
 
@@ -105,18 +101,6 @@ sap.ui.define([
                 var sPhone = oContext.getProperty("phone");
                 var sName = oContext.getProperty("contactName");
                 var sImage = oContext.getProperty("photo").replace("images/", "");
-
-                // Filter the received messages by phone number
-                var aFilteredReceivedMessages = oReceivedMessages.getData().filter(function (message) {
-                    return message.phone === sPhone;
-                });
-
-                // Filter the sent messages by phone number
-                var aFilteredSentMessages = oSentMessages.getData().filter(function (message) {
-                    return message.phone === sPhone;
-                });
-
-                
 
                 // Perform navigation to the chat detail view, passing the filtered messages as parameters
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);

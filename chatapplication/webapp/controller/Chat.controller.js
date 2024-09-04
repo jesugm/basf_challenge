@@ -114,11 +114,15 @@ sap.ui.define([
                 var aMessages = oModel.getProperty("/");
 
                 var sPhone = aMessages[0] ? aMessages[0].phone : "";
+
+                var date = new Date();
+                var customDateStr = this.formatCustomDate(date);
     
                 // Create a new message object
                 var oNewMessage = {
                     text: sMessage,
-                    date: new Date().toLocaleString().replace(/:\d{2}$/, ''),  // Example date format
+                    // date: new Date().toLocaleString().replace(/:\d{2}$/, ''),  // Example date format
+                    date: customDateStr,
                     flag: "S",  // Assuming "S" for sent messages
                     phone: sPhone,
                     sent: true,
@@ -129,9 +133,9 @@ sap.ui.define([
     
                 // Add the new message to the model
                 aMessages.push(oNewMessage);
+                aMessages = this.processMessages(aMessages);
                 oModel.setProperty("/", aMessages);
                 var aGlobalSentMessages = this.getOwnerComponent().getModel("sentMessages").getData();
-                oNewMessage.date = oNewMessage.date.replace(", ", "T");
                 aGlobalSentMessages.push(oNewMessage);
                 this.getOwnerComponent().getModel("sentMessages").setData(aGlobalSentMessages);
     
@@ -155,8 +159,47 @@ sap.ui.define([
                 }
             },
 
-            // onUpdateFinished: function(){
-            //     this._scrollToLastItem();
-            // }
+            formatCustomDate: function(date) {
+                // Extract day, month, year, hours, and minutes
+                var day = date.getDate().toString().padStart(2, '0');
+                var month = (date.getMonth() + 1).toString().padStart(2, '0');
+                var year = date.getFullYear();
+                var hours = date.getHours().toString().padStart(2, '0');
+                var minutes = date.getMinutes().toString().padStart(2, '0');
+            
+                // Construct the custom format string
+                return `${day}/${month}/${year}T${hours}:${minutes}`;
+            },
+
+            processMessages: function (aMessages) {
+                // Ensure the array is not empty
+                if (!aMessages || aMessages.length === 0) {
+                    return;
+                }
+            
+                aMessages.forEach((message, index) => {
+                    // Determine whether to show the date
+                    if (index === 0) {
+                        message.showDate = true; // Show the date for the first message
+                    } else {
+                        var previousMessage = aMessages[index - 1];
+                        // Show the date if different from the previous message
+                        message.showDate = message.date !== previousMessage.date;
+                    }
+            
+                    // Add 'check' property based on sent and read properties
+                    if (message.sent) {
+                        if (message.read) {
+                            message.check = 'R'; // Sent and read
+                        } else {
+                            message.check = 'G'; // Sent but not read
+                        }
+                    } else {
+                        message.check = ''; // Not sent
+                    }
+                });
+
+                return aMessages;
+            }
         });
     });

@@ -8,6 +8,9 @@
             <List id="chatList" items="{chat>/}" growing="true" growingScrollToLoad="true" >
                 <items>
                     <CustomListItem class="listItem" >
+                                <HBox justifyContent="Center" alignItems="Center" class="dateBox">
+                                    <Text text=" { path: 'chat>date' , formatter: '.formatter.formatDate'}" class="dateText" />
+                                </HBox>                                
                                 <HBox class="horizontalBox">
                                     <Image class="profilePic" src="images/miguel.jpg" visible="{= ${chat>flag} === 'R' }"></Image>
                                     <Image 
@@ -21,7 +24,6 @@
                                         visible="false" />
                                     <VBox>
                                         <Text text="{chat>text}" class="messageText" wrapping="true" />
-                                        <!-- <Text text=" { path: 'chat>date' , formatter: '.formatter.formatDate'}" class="dateText" /> -->
                                         
                                         <customData>
                                             <core:CustomData key="flag" value="{chat>flag}" writeToDom="true" />

@@ -3,7 +3,7 @@
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
     controllerName="com.basf.yardmanagement.chatapp.chatapplication.controller.Chat">    
-    <Page title="Name">
+    <Page title="{viewModel>/currentName}">
         <content>
             <List id="chatList" items="{chat>/}" growing="true" growingScrollToLoad="true" >
                 <items>

@@ -86,7 +86,7 @@
           ]
         },
         {
-          "pattern": "chat/{phone}",
+          "pattern": "chat/{phone}/{name}",
           "name": "Chat",
           "target": "chatDetail"
         }

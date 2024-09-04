@@ -106,5 +106,9 @@
     padding-top: 1rem;
 }
 
+.sapUiSizeCompact .sapMListNoData{
+    visibility: hidden;
+}
+
 
 

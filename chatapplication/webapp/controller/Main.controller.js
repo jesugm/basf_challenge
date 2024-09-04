@@ -100,6 +100,7 @@ sap.ui.define([
 
                 // Retrieve the phone number of the clicked chat item from the context
                 var sPhone = oContext.getProperty("phone");
+                var sName = oContext.getProperty("contactName");
 
                 // Filter the received messages by phone number
                 var aFilteredReceivedMessages = oReceivedMessages.getData().filter(function (message) {
@@ -121,8 +122,7 @@ sap.ui.define([
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.navTo("Chat", {
                     phone: sPhone, // Pass data as a JSON string
-                    receivedMessages: oData.receivedMessages,
-                    sentMessages: oData.sentMessages
+                    name: sName
                 });
 
             }

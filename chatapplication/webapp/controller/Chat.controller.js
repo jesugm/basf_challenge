@@ -16,11 +16,19 @@ sap.ui.define([
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.getRoute("Chat").attachPatternMatched(this._onObjectMatched, this);
 
+                this.getView().setModel(new JSONModel(), "viewModel");
+
                 this._scrollToLastItem();
             },
 
             _onObjectMatched: async function (oEvent) {
                 var sPhone = oEvent.getParameter("arguments").phone;
+                var sName = oEvent.getParameter("arguments").name;
+
+                var oView = this.getView();
+                var oModel = oView.getModel("viewModel");
+
+                oModel.setProperty("/currentName", sName);
 
                 var oReceivedMessages = await this.models.getReceivedMessages(); // Mock function
                 var oSentMessages = await this.models.getSentMessages(); // Mock function

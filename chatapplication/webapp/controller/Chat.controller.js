@@ -142,10 +142,6 @@ sap.ui.define([
                 // Clear the input field
                 oInput.setValue("");
 
-                //This code, in a real application would be used to send the message to the backend
-                //so it persists, making possible  
-                //this.models.sendMessage(oNewMessage)
-
                 this._scrollToLastItem();
             },
 

@@ -38,20 +38,45 @@ sap.ui.define([
 
                 // Combine and find the latest message per contact
                 this._getLatestMessages(oReceivedMessagesModel.getData(), oSentMessagesModel.getData());
+
             },
 
 
             _getLatestMessages: function (receivedMessages, sentMessages) {
-                var oLatestMessages = {};
                 var aChats = this.getView().getModel("chats").getData();
 
-                // Combine messages into a single object
-                [...receivedMessages, ...sentMessages].forEach(function (message) {
-                    var sPhone = message.phone;
-                    if (!oLatestMessages[sPhone] || new Date(message.date) > new Date(oLatestMessages[sPhone].date)) {
-                        oLatestMessages[sPhone] = message;
-                    }
+                var aAllMessages =  [...receivedMessages, ...sentMessages];
+
+                aAllMessages.sort(function (a, b) {
+                    // Custom date parsing to handle "DD/MM/YYYYTHH:mm"
+                    var parseDate = function (dateString) {
+                        var parts = dateString.split('T');
+                        var dateParts = parts[0].split('/');
+                        var timeParts = parts[1].split(':');
+                        // Rearrange to "YYYY-MM-DDTHH:mm" format
+                        return new Date(`${dateParts[2]}-${dateParts[1]}-${dateParts[0]}T${timeParts[0]}:${timeParts[1]}`);
+                    };
+
+                    return parseDate(a.date) - parseDate(b.date);
                 });
+
+                var messageMap = aAllMessages.reduce((map, message) => {
+                    // Initialize array if it doesn't exist
+                    if (!map[message.phone]) {
+                        map[message.phone] = [];
+                    }
+                    // Add message to the corresponding phone number key
+                    map[message.phone].push(message);
+                    return map;
+                }, {});            
+
+                var oLatestMessages = Object.keys(messageMap).reduce((latestMessages, phone) => {
+                    var messages = messageMap[phone];
+                    // The last message is the most recent one due to sorting
+                    latestMessages[phone] = messages[messages.length - 1];
+                    return latestMessages;
+                }, {});
+
 
                 aChats.forEach(chat => {
                     if (oLatestMessages[chat.phone]) {
@@ -110,6 +135,17 @@ sap.ui.define([
                     image: sImage
                 });
 
-            }
+            },
+
+            _applySorter: function () {
+                var oList = this.byId("chatsList");
+                var oBinding = oList.getBinding("items");
+    
+                // Define the sorter
+                var oSorter = new sap.ui.model.Sorter("lastMessage/date", true);
+    
+                // Apply the sorter to the binding
+                oBinding.sort(oSorter);
+            },
         });
     });

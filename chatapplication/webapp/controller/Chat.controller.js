@@ -18,8 +18,9 @@ sap.ui.define([
 
                 this.getView().setModel(new JSONModel(), "viewModel");
 
-                this._scrollToLastItem();
+                
             },
+            
 
             _onObjectMatched: async function (oEvent) {
                 var sPhone = oEvent.getParameter("arguments").phone;
@@ -90,7 +91,11 @@ sap.ui.define([
                 // Create a JSON model with the combined messages
                 var oChatModel = new JSONModel(aAllMessages);
                 this.getView().setModel(oChatModel, "chat");
-                
+
+                //Use a timeout to ensure the view is rendered
+                setTimeout(() => {
+                    this._scrollToLastItem();
+                }, 475);  // Adjust the timeout as needed               
             },
 
             onSendPress: function () {
@@ -148,6 +153,10 @@ sap.ui.define([
                 if (iLastItemIndex >= 0) {
                     await oList.scrollToIndex(iLastItemIndex);
                 }
-            }
+            },
+
+            // onUpdateFinished: function(){
+            //     this._scrollToLastItem();
+            // }
         });
     });

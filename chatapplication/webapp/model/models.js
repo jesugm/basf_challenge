@@ -20,7 +20,19 @@ function (JSONModel, Device) {
         getChats: async function(){
             var oMydata = new sap.ui.model.json.JSONModel(); 
             await oMydata.loadData("chatsSet.json"); 
-            return oMydata.getData();
+            return oMydata;
+        },
+
+        getReceivedMessages: async function(){
+            var oMydata = new sap.ui.model.json.JSONModel(); 
+            await oMydata.loadData("ReceivedMessages.json"); 
+            return oMydata;
+        },
+
+        getSentMessages: async function(){
+            var oMydata = new sap.ui.model.json.JSONModel(); 
+            await oMydata.loadData("SentMessages.json"); 
+            return oMydata;
         },
     };
 

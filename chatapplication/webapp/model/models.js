@@ -25,13 +25,13 @@ function (JSONModel, Device) {
 
         getReceivedMessages: async function(){
             var oMydata = new sap.ui.model.json.JSONModel(); 
-            await oMydata.loadData("ReceivedMessages.json"); 
+            await oMydata.loadData("ReceivedMessagesSet.json"); 
             return oMydata;
         },
 
         getSentMessages: async function(){
             var oMydata = new sap.ui.model.json.JSONModel(); 
-            await oMydata.loadData("SentMessages.json"); 
+            await oMydata.loadData("SentMessagesSet.json"); 
             return oMydata;
         },
     };

@@ -29,9 +29,24 @@
     text-align: left;
 }
 
+.dateBox{	
+    margin: 10px;
+}
+
+.dateBox div{	
+   order: 0;
+    flex: 0 1 auto;
+    min-height: auto;
+    background: #e7e7e7;
+    min-width: auto;
+    border-radius: 10px;
+    padding: 5px;
+    color: white;
+}
+
 .sapMTextMaxWidth.dateText {
     font-size: 0.75rem;
-    color: #999;
+    color: grey;
     margin-top: 4px;
 }
 

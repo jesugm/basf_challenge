@@ -3,7 +3,7 @@ sap.ui.define([], () => {
 
 	return {
 		formatDate(sDate) {
-			return sDate;
+			return sDate.replace("T", ", ");
 		}
 	};
 });

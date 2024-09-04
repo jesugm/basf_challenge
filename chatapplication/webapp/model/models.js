@@ -16,7 +16,13 @@ function (JSONModel, Device) {
         },
 
         
-        
+        /**
+         * Fetches the chat data from a JSON file and returns it as a JSONModel. Simulates real world oData call.
+         * Shows a busy indicator while data is loading and hides it once the data is loaded.
+         * @async
+         * @returns {Promise<sap.ui.model.json.JSONModel>} - A promise that resolves to the chat data model.
+         * @memberof com.basf.yardmanagement.chatapp.chatapplication.model
+         */
         getChats: async function(){
             sap.ui.core.BusyIndicator.show();
             var oMydata = new sap.ui.model.json.JSONModel(); 
@@ -25,6 +31,13 @@ function (JSONModel, Device) {
             return oMydata;
         },
 
+        /**
+         * Fetches the received messages from a JSON file and returns them as a JSONModel.  Simulates real world oData call.
+         * Shows a busy indicator while data is loading and hides it once the data is loaded.
+         * @async
+         * @returns {Promise<sap.ui.model.json.JSONModel>} - A promise that resolves to the received messages model.
+         * @memberof com.basf.yardmanagement.chatapp.chatapplication.model
+         */
         getReceivedMessages: async function(){
             sap.ui.core.BusyIndicator.show();
             var oMydata = new sap.ui.model.json.JSONModel(); 
@@ -33,6 +46,14 @@ function (JSONModel, Device) {
             return oMydata;
         },
 
+        
+        /**
+         * Fetches the sent messages from a JSON file and returns them as a JSONModel.  Simulates real world oData call.
+         * Shows a busy indicator while data is loading and hides it once the data is loaded.
+         * @async
+         * @returns {Promise<sap.ui.model.json.JSONModel>} - A promise that resolves to the received messages model.
+         * @memberof com.basf.yardmanagement.chatapp.chatapplication.model
+         */
         getSentMessages: async function(){
             sap.ui.core.BusyIndicator.show();
             var oMydata = new sap.ui.model.json.JSONModel(); 

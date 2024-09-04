@@ -11,6 +11,11 @@ sap.ui.define([
 
             models: models,
 
+            /**
+             * Initializes the controller. Sets up the chat model and attaches route pattern matched event.
+             * @memberof com.basf.yardmanagement.chatapp.chatapplication.controller.Main
+             * @async
+             */
             onInit:async function () {
 
                 // Set up the chat model               
@@ -27,10 +32,20 @@ sap.ui.define([
 
             },
 
+            /**
+             * Event handler for when the route pattern is matched.
+             * @memberof com.basf.yardmanagement.chatapp.chatapplication.controller.Main
+             * @async
+             */
             _onObjectMatched: async function(){
                 await this._loadAndProcessData();
             },
 
+             /**
+             * Loads and processes data to find and update the latest messages for each chat.
+             * @memberof com.basf.yardmanagement.chatapp.chatapplication.controller.Main
+             * @async
+             */
             _loadAndProcessData: async function () {
                 // Example data loading - replace with actual data fetch if needed
                 var oReceivedMessagesModel = await this.models.getReceivedMessages(); // Mock function
@@ -41,7 +56,12 @@ sap.ui.define([
 
             },
 
-
+             /**
+             * Finds the latest messages from received and sent messages and updates the chat model.
+             * @param {Object[]} receivedMessages - Array of received message objects.
+             * @param {Object[]} sentMessages - Array of sent message objects.
+             * @memberof com.basf.yardmanagement.chatapp.chatapplication.controller.Main
+             */
             _getLatestMessages: function (receivedMessages, sentMessages) {
                 var aChats = this.getView().getModel("chats").getData();
 
@@ -93,6 +113,12 @@ sap.ui.define([
                 this.getView().setModel(oModel, "chats");
             },
 
+             /**
+             * Event handler for the search field's liveChange event.
+             * Applies a filter to the chat list based on the search query.
+             * @param {sap.ui.base.Event} oEvent - The event object.
+             * @memberof com.basf.yardmanagement.chatapp.chatapplication.controller.Main
+             */
             onSearch: function (oEvent) {
                 // Get the search query
                 var sQuery = oEvent.getParameter("newValue");
@@ -114,6 +140,13 @@ sap.ui.define([
                 oBinding.filter([oFilter]);
             },
 
+            /**
+             * Event handler for when a chat item is pressed.
+             * Navigates to the chat detail view with the selected chat's data.
+             * @param {sap.ui.base.Event} oEvent - The event object.
+             * @memberof com.basf.yardmanagement.chatapp.chatapplication.controller.Main
+             * @async
+             */
             onChatPress: async function (oEvent) {
 
                 // Get the selected item from the event
@@ -137,15 +170,6 @@ sap.ui.define([
 
             },
 
-            _applySorter: function () {
-                var oList = this.byId("chatsList");
-                var oBinding = oList.getBinding("items");
-    
-                // Define the sorter
-                var oSorter = new sap.ui.model.Sorter("lastMessage/date", true);
-    
-                // Apply the sorter to the binding
-                oBinding.sort(oSorter);
-            },
+            
         });
     });

@@ -12,6 +12,11 @@ sap.ui.define([
             formatter: formatter,
             models: models,
 
+
+            /**
+             * Initializes the controller. Sets up the router and model.
+             * @memberof com.basf.yardmanagement.chatapp.chatapplication.controller.Chat
+             */
             onInit: function () {
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.getRoute("Chat").attachPatternMatched(this._onObjectMatched, this);
@@ -21,7 +26,12 @@ sap.ui.define([
                 
             },
             
-
+            /**
+             * Event handler for when the route pattern is matched.
+             * @param {sap.ui.base.Event} oEvent - The route matched event.
+             * @memberof com.basf.yardmanagement.chatapp.chatapplication.controller.Chat
+             * @async
+             */
             _onObjectMatched: async function (oEvent) {
                 var sPhone = oEvent.getParameter("arguments").phone;
                 var sName = oEvent.getParameter("arguments").name;
@@ -98,6 +108,11 @@ sap.ui.define([
                 }, 475);  // Adjust the timeout as needed               
             },
 
+            /**
+             * Event handler for the Send button press.
+             * Retrieves the input value, creates a new message, and updates the models.
+             * @memberof com.basf.yardmanagement.chatapp.chatapplication.controller.Chat
+             */
             onSendPress: function () {
                 // Retrieve input value
                 var oInput = this.byId("messageInput");
@@ -121,14 +136,13 @@ sap.ui.define([
                 // Create a new message object
                 var oNewMessage = {
                     text: sMessage,
-                    // date: new Date().toLocaleString().replace(/:\d{2}$/, ''),  // Example date format
                     date: customDateStr,
                     flag: "S",  // Assuming "S" for sent messages
                     phone: sPhone,
                     sent: true,
                     delivered: true,
                     read: false,
-                    check: 'G'
+                    check: 'G' //we assume that the message is sent but not read
                 };
     
                 // Add the new message to the model
@@ -137,6 +151,7 @@ sap.ui.define([
                 oModel.setProperty("/", aMessages);
                 var aGlobalSentMessages = this.getOwnerComponent().getModel("sentMessages").getData();
                 aGlobalSentMessages.push(oNewMessage);
+                // We use owner component in this case to make the sent messages persist in the app, in a real world application we would make a oData call to save the message.
                 this.getOwnerComponent().getModel("sentMessages").setData(aGlobalSentMessages);
     
                 // Clear the input field
@@ -145,6 +160,11 @@ sap.ui.define([
                 this._scrollToLastItem();
             },
 
+            /**
+             * Scrolls to the last item in the chat list.
+             * @async
+             * @memberof com.basf.yardmanagement.chatapp.chatapplication.controller.Chat
+             */
             _scrollToLastItem: async function () {
                 var oList = this.byId("chatList");  // Get the list control
                 var iLastItemIndex = oList.getItems().length - 1;  // Get the index of the last item
@@ -155,6 +175,12 @@ sap.ui.define([
                 }
             },
 
+            /**
+             * Formats the given date into a custom string format.
+             * @param {Date} date - The date to format.
+             * @returns {string} The formatted date string in "DD/MM/YYYYTHH:mm" format.
+             * @memberof com.basf.yardmanagement.chatapp.chatapplication.controller.Chat
+             */
             formatCustomDate: function(date) {
                 // Extract day, month, year, hours, and minutes
                 var day = date.getDate().toString().padStart(2, '0');
@@ -167,6 +193,12 @@ sap.ui.define([
                 return `${day}/${month}/${year}T${hours}:${minutes}`;
             },
 
+            /**
+             * Processes messages to determine the visibility of the date and the 'check' property.
+             * @param {Object[]} aMessages - Array of message objects to process.
+             * @returns {Object[]} The processed array of message objects.
+             * @memberof com.basf.yardmanagement.chatapp.chatapplication.controller.Chat
+             */
             processMessages: function (aMessages) {
                 // Ensure the array is not empty
                 if (!aMessages || aMessages.length === 0) {
